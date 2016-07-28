@@ -65,6 +65,10 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES]; // Turns off the highlight!!!
     NSString *unitName = self.units[indexPath.row];
     [self.delegate unitWasChosen:unitName];
+    
+    // ********* Make it go to the text field and bring up the keyboard ************
+
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
