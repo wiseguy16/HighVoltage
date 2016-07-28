@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HighVoltageTableViewController.h" // protocol was defined from this class
 
 @interface UnitsListTableViewController : UITableViewController
+
+
+// Public property
+@property (strong, nonatomic) NSArray *units;
+@property (strong, nonatomic) id<UnitsListDelegate> delegate; // we are going to set this later
+
 
 @end

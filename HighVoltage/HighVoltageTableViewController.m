@@ -7,12 +7,13 @@
 //
 
 #import "HighVoltageTableViewController.h"
+#import "UnitsListTableViewController.h"
 
 #import "HighVoltageTableViewCell.h"
 
 #import "HighVoltageBrain.h"
 
-@interface HighVoltageTableViewController ()
+@interface HighVoltageTableViewController () <UIPopoverPresentationControllerDelegate, UnitsListDelegate>
 
 
 // This is the private interface******************************
@@ -48,6 +49,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"UnitsNamePopoverSegue"])
+    {
+        UnitsListTableViewController *hVListVC = [segue destinationViewController];
+        hVListVC.units = self.remainingUnits;
+        hVListVC.popoverPresentationController.delegate = self;
+        hVListVC.delegate = self; // This assigns a value to the delegate
+        int contentHeight = 44.0f * self.remainingUnits.count;
+        hVListVC.preferredContentSize = CGSizeMake(200.0f, contentHeight);
+    }
+    
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+
+
+
+#pragma mark UIPopover stuff
+
+-(UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
+{
+    return UIModalPresentationNone;
+}
+
+
 
 #pragma mark - Table view data source
 
@@ -116,6 +146,20 @@
 - (IBAction)clearTapped:(UIBarButtonItem *)sender
 {
     //self.HighVoltageBrain = nil;
+}
+
+
+#pragma mark - CharacterList delegate
+-(void)unitWasChosen:(NSString*)unitName
+{
+    
+    [self.visibleUnits addObject:unitName];
+    [self.remainingUnits removeObject:unitName];
+    if (self.remainingUnits.count == 0)
+    {
+        [self.addButton setEnabled:NO];
+    }
+    [self.tableView reloadData];
 }
 
 
