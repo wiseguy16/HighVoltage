@@ -18,7 +18,7 @@
                                 <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bMT-CO-vcD" id="puE-OR-uId">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Electrical Potential" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3H-zT-eZg">
@@ -40,6 +40,10 @@
                                         <constraint firstItem="B3H-zT-eZg" firstAttribute="centerY" secondItem="puE-OR-uId" secondAttribute="centerY" id="sXV-kx-eg3"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="valueNameLabel" destination="B3H-zT-eZg" id="DTX-zV-F2f"/>
+                                    <outlet property="valueTextField" destination="pi4-fc-WDo" id="1ys-M0-OFL"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -50,15 +54,54 @@
                     <navigationItem key="navigationItem" title="High Voltage" id="v1u-K2-sf5">
                         <barButtonItem key="leftBarButtonItem" title="Clear" id="60I-sh-GHt">
                             <color key="tintColor" red="0.88235294119999996" green="0.067189026200000002" blue="0.1136151425" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="clearTapped:" destination="9S4-e7-fZg" id="EEh-JA-hEf"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="v5d-d5-Euv">
                             <color key="tintColor" red="0.88235294119999996" green="0.067189026200000002" blue="0.1136151425" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="GEM-ti-Aiz" kind="popoverPresentation" popoverAnchorBarButtonItem="v5d-d5-Euv" id="LIm-6L-vdE">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="v5d-d5-Euv" id="oA5-1y-1c0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HpQ-Tz-Ugu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1103" y="414"/>
+        </scene>
+        <!--Units List Table View Controller-->
+        <scene sceneID="dNK-L5-6Td">
+            <objects>
+                <tableViewController id="GEM-ti-Aiz" customClass="UnitsListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iWB-LJ-znz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="YVp-VV-usL">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YVp-VV-usL" id="tix-QU-UfP">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="GEM-ti-Aiz" id="MGu-Nf-tuJ"/>
+                            <outlet property="delegate" destination="GEM-ti-Aiz" id="CvY-NL-L9N"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="41y-Jx-3ji" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1770" y="414"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iUg-He-0vu">

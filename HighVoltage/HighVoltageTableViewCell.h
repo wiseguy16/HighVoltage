@@ -10,4 +10,8 @@
 
 @interface HighVoltageTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *valueNameLabel;
+
+@property (weak, nonatomic) IBOutlet UITextField *valueTextField;
+
 @end

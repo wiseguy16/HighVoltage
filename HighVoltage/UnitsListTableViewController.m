@@ -1,41 +1,21 @@
 //
-//  HighVoltageTableViewController.m
+//  UnitsListTableViewController.m
 //  HighVoltage
 //
 //  Created by Gregory Weiss on 7/28/16.
 //  Copyright © 2016 Gregory Weiss. All rights reserved.
 //
 
-#import "HighVoltageTableViewController.h"
+#import "UnitsListTableViewController.h"
 
-#import "HighVoltageTableViewCell.h"
-
-#import "HighVoltageBrain.h"
-
-@interface HighVoltageTableViewController ()
-
-
-// This is the private interface******************************
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
-
-@property (strong, nonatomic) NSMutableArray *visibleUnits;
-@property (strong, nonatomic) NSMutableArray *remainingUnits;
-
-@property (strong, nonatomic) NSDictionary *allUnits;
-
-
+@interface UnitsListTableViewController ()
 
 @end
 
-@implementation HighVoltageTableViewController
+@implementation UnitsListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.visibleUnits = [[NSMutableArray alloc] init];
-    self.allUnits = @{@"Obi-Wan Kenobi": @"Kenobi.jpg", @"Leia Organa": @"Organa.jpg", @"R2-D2": @"R2.jpg", @"Luke Skywalker": @"Skywalker.jpg", @"Grand Moff Tarkin": @"Tarkin.jpg", @"Darth Vader": @"Vader.jpg"};
-    
-    self.remainingUnits = [[self.allUnits allKeys] mutableCopy];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -52,22 +32,24 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+#warning Incomplete implementation, return the number of sections
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.visibleUnits.count;
+#warning Incomplete implementation, return the number of rows
+    return 0;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    HighVoltageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HiVoltCell" forIndexPath:indexPath];
+/*
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
     // Configure the cell...
     
     return cell;
 }
+*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -112,11 +94,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)clearTapped:(UIBarButtonItem *)sender
-{
-    //self.HighVoltageBrain = nil;
-}
-
 
 @end

@@ -15,6 +15,7 @@
 		4AFE71C11D4A9A39000F5C67 /* HighVoltageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE71C01D4A9A39000F5C67 /* HighVoltageTableViewController.m */; };
 		4AFE71C41D4A9BF0000F5C67 /* HighVoltageBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE71C31D4A9BF0000F5C67 /* HighVoltageBrain.m */; };
 		4AFE71C71D4A9C1D000F5C67 /* HighVoltageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE71C61D4A9C1D000F5C67 /* HighVoltageTableViewCell.m */; };
+		4AFE71CA1D4AAB28000F5C67 /* UnitsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE71C91D4AAB28000F5C67 /* UnitsListTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		4AFE71C31D4A9BF0000F5C67 /* HighVoltageBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighVoltageBrain.m; sourceTree = "<group>"; };
 		4AFE71C51D4A9C1D000F5C67 /* HighVoltageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighVoltageTableViewCell.h; sourceTree = "<group>"; };
 		4AFE71C61D4A9C1D000F5C67 /* HighVoltageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighVoltageTableViewCell.m; sourceTree = "<group>"; };
+		4AFE71C81D4AAB28000F5C67 /* UnitsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitsListTableViewController.h; sourceTree = "<group>"; };
+		4AFE71C91D4AAB28000F5C67 /* UnitsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsListTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +73,8 @@
 				4AFE71C01D4A9A39000F5C67 /* HighVoltageTableViewController.m */,
 				4AFE71C51D4A9C1D000F5C67 /* HighVoltageTableViewCell.h */,
 				4AFE71C61D4A9C1D000F5C67 /* HighVoltageTableViewCell.m */,
+				4AFE71C81D4AAB28000F5C67 /* UnitsListTableViewController.h */,
+				4AFE71C91D4AAB28000F5C67 /* UnitsListTableViewController.m */,
 				4AFE71C21D4A9BF0000F5C67 /* HighVoltageBrain.h */,
 				4AFE71C31D4A9BF0000F5C67 /* HighVoltageBrain.m */,
 				4AFE71B11D4A99DD000F5C67 /* Main.storyboard */,
@@ -160,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AFE71C11D4A9A39000F5C67 /* HighVoltageTableViewController.m in Sources */,
+				4AFE71CA1D4AAB28000F5C67 /* UnitsListTableViewController.m in Sources */,
 				4AFE71AD1D4A99DD000F5C67 /* AppDelegate.m in Sources */,
 				4AFE71AA1D4A99DD000F5C67 /* main.m in Sources */,
 				4AFE71C41D4A9BF0000F5C67 /* HighVoltageBrain.m in Sources */,
