@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  HighVoltageTableViewController.h
 //  HighVoltage
 //
 //  Created by Gregory Weiss on 7/28/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface HighVoltageTableViewController : UITableViewController
 
 @end
-
