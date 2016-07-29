@@ -13,7 +13,7 @@
 
 #import "HighVoltageBrain.h"
 
-@interface HighVoltageTableViewController () <UIPopoverPresentationControllerDelegate, UnitsListDelegate>
+@interface HighVoltageTableViewController () <UIPopoverPresentationControllerDelegate, UnitsListDelegate, UITextFieldDelegate>
 
 
 // This is the private interface******************************
@@ -34,7 +34,7 @@
     [super viewDidLoad];
     
     self.visibleUnits = [[NSMutableArray alloc] init];
-    self.allUnits = @{@"Obi-Wan Kenobi": @"Kenobi.jpg", @"Leia Organa": @"Organa.jpg", @"R2-D2": @"R2.jpg", @"Luke Skywalker": @"Skywalker.jpg", @"Grand Moff Tarkin": @"Tarkin.jpg", @"Darth Vader": @"Vader.jpg"};
+    self.allUnits = @{@"Volts": @"Electrical Potential", @"Watts": @"Power", @"Amps": @"Current", @"Ohms": @"Resistance"};
     
     self.remainingUnits = [[self.allUnits allKeys] mutableCopy];
     
@@ -95,6 +95,18 @@
     HighVoltageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HiVoltCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    [cell.valueTextField becomeFirstResponder];
+    
+    NSString *labelNameKey = self.visibleUnits[indexPath.row];
+   // NSString *labelNameValue = [NSString stringWithFormat:self.allUnits[indexPath.row];
+    NSString *labelNameValue = [self.allUnits objectForKey:labelNameKey];
+
+    //cell.cardImageView.image = [UIImage imageNamed:self.allCards[characterName]];
+    
+    cell.valueNameLabel.text = labelNameValue;
+    cell.valueTextField.placeholder = labelNameKey;
+    
+    
     
     return cell;
 }
@@ -145,7 +157,12 @@
 
 - (IBAction)clearTapped:(UIBarButtonItem *)sender
 {
-    //self.HighVoltageBrain = nil;
+    // self.HighVoltageBrain = nil;
+    self.visibleUnits = [[NSMutableArray alloc] init];
+    self.allUnits = @{@"Volts": @"V", @"Watts": @"W", @"Amps": @"A", @"Ohms": @"O"};
+    
+    self.remainingUnits = [[self.allUnits allKeys] mutableCopy];
+    [self.tableView reloadData];
 }
 
 
@@ -160,6 +177,11 @@
         [self.addButton setEnabled:NO];
     }
     [self.tableView reloadData];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 
