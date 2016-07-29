@@ -10,6 +10,17 @@
 
 @interface HighVoltageBrain : NSObject
 
+typedef enum
+{
+    OperatorTypeNone,
+    OperatorTypeAddition,
+    OperatorTypeSubtraction,
+    OperatorTypeMultiplication,
+    OperatorTypeDivision
+} OperatorType;
+
+@property (assign) OperatorType *thisOperator;
+
 - (NSString *)addOperandDigit:(NSString *)digit;
 - (NSString *)addOperator:(NSString *)operatorValue;
 - (NSString *)performCalculationIfPossible;

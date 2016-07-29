@@ -8,14 +8,14 @@
 
 #import "HighVoltageBrain.h"
 
-typedef enum
-{
-    OperatorTypeNone,
-    OperatorTypeAddition,
-    OperatorTypeSubtraction,
-    OperatorTypeMultiplication,
-    OperatorTypeDivision
-} OperatorType;
+//typedef enum
+//{
+//    OperatorTypeNone,
+//    OperatorTypeAddition,
+//    OperatorTypeSubtraction,
+//    OperatorTypeMultiplication,
+//    OperatorTypeDivision
+//} OperatorType;
 
 
 @interface HighVoltageBrain ()
