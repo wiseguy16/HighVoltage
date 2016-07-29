@@ -38,6 +38,7 @@
     
     self.remainingUnits = [[self.allUnits allKeys] mutableCopy];
     
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -96,6 +97,7 @@
     
     // Configure the cell...
     [cell.valueTextField becomeFirstResponder];
+    cell.valueTextField.delegate = self;
     
     NSString *labelNameKey = self.visibleUnits[indexPath.row];
    // NSString *labelNameValue = [NSString stringWithFormat:self.allUnits[indexPath.row];
@@ -159,7 +161,7 @@
 {
     // self.HighVoltageBrain = nil;
     self.visibleUnits = [[NSMutableArray alloc] init];
-    self.allUnits = @{@"Volts": @"V", @"Watts": @"W", @"Amps": @"A", @"Ohms": @"O"};
+    self.allUnits = @{@"Volts": @"Electrical Potential", @"Watts": @"Power", @"Amps": @"Current", @"Ohms": @"Resistance"};
     
     self.remainingUnits = [[self.allUnits allKeys] mutableCopy];
     [self.tableView reloadData];
@@ -179,7 +181,8 @@
     [self.tableView reloadData];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
     return YES;
 }
