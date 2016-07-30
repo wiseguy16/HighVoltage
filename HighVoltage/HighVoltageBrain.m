@@ -8,15 +8,6 @@
 
 #import "HighVoltageBrain.h"
 
-//typedef enum
-//{
-//    OperatorTypeNone,
-//    OperatorTypeAddition,
-//    OperatorTypeSubtraction,
-//    OperatorTypeMultiplication,
-//    OperatorTypeDivision
-//} OperatorType;
-
 
 @interface HighVoltageBrain ()
 
@@ -66,9 +57,9 @@
         {
             [self.operand1String appendString:digit];
         }
-      //  NSLog(@"operand1String is %@", self.operand1String);
+      
         returnString = self.operand1String;
-       // NSLog(@"operand1String is %@", self.operand1String);
+       
 
     }
     else if (self.brainRtrnCount == 1)

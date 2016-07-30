@@ -182,8 +182,11 @@
     // self.HighVoltageBrain = nil;
     self.visibleUnits = [[NSMutableArray alloc] init];
     self.allUnits = @{@"Volts": @"Electrical Potential", @"Watts": @"Power", @"Amps": @"Current", @"Ohms": @"Resistance"};
-    
+    self.returnPressedCount = 0;
     self.remainingUnits = [[self.allUnits allKeys] mutableCopy];
+        
+    
+    self.brain = nil;
     [self.tableView reloadData];
 }
 
@@ -210,8 +213,6 @@
     if (!self.brain) // See if there is a Brain object, If not, make one.
     {
         self.brain = [[HighVoltageBrain alloc] init];
-        double a = self.brain.ampsAsADouble;
-        NSLog(@"amps is %g", a);
         
      }
     //********* This picks the right textField ********************
@@ -248,20 +249,12 @@
         if (self.returnPressedCount < 2) // Is it the First number?
         {
             [self.brain addOperandDigit: textField.text];
-//            [self.brain addOperator:self.comboString];
             [self.brain getReturnCount:self.returnPressedCount];
-           // [self.actualAnswersArray addObject:@"45678"];
-
-           
         }
         else // This will enter 2nd Number from textField
         {
             [self.brain addOperandDigit: textField.text];
             [self.brain getReturnCount:self.returnPressedCount];
-         //   [self.actualAnswersArray addObject:textField.text];
-
-           // [self.brain performCalculationIfPossible];
-
         }
     
 //********* This happens after 2nd number entered ********************
@@ -272,8 +265,6 @@
     {
         [self.brain getReturnCount:self.returnPressedCount];
         [self.brain addOperator:self.comboString];
-         NSString *displayValue = [self.brain performCalculationIfPossible];
-        NSLog(@"Answer: %@", displayValue);
         [self.brain performCalculationIfPossible];
         NSLog(@"amps is %@", self.brain.ampsAsAString);
         NSLog(@"volts is %@", self.brain.voltsAsAString);
@@ -283,27 +274,9 @@
 
         [self.tableView reloadData]; // Doesn't Seem to help?????????
     }
-    
-    
-//    NSLog(@"num is : %@", textField.text);
-//    NSLog(@"volts : %@", self.voltsString);
-//    NSLog(@"amps is : %@", self.ampsString);
-//    NSLog(@"watts is : %@", self.wattsString);
-//    NSLog(@"ohms is : %@", self.ohmsString);
-    NSLog(@"combo is : %@", self.comboString);
+
     NSLog(@"returnPressedCount is : %d", self.returnPressedCount);
-//    NSLog(@"addOperandDigit is : %@", @"check the brain");
 
-//    NSLog(self.answerNameLabelsArray);
-    NSLog(@"What is this %@", self.actualAnswersArray[0]);
-    
-   // double a = self.brain.ampsAsADouble;
-//    NSLog(@"amps is %@", self.brain.ampsAsAString);
-//    NSLog(@"volts is %@", self.brain.voltsAsAString);
-//    NSLog(@"watts is %@", self.brain.wattsAsAString);
-//    NSLog(@"ohms is %@", self.brain.ohmsAsAString);
-
-    
     [textField resignFirstResponder];
  
     return YES;
