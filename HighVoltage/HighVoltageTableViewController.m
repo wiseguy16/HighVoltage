@@ -22,6 +22,8 @@
 @property (strong, nonatomic) NSMutableArray *visibleUnits;
 @property (strong, nonatomic) NSMutableArray *remainingUnits;
 @property (strong, nonatomic) NSMutableArray *textFieldArray;
+@property (strong, nonatomic) NSMutableArray *answerNameLabelsArray;
+@property (strong, nonatomic) NSMutableArray *actualAnswersArray;
 
 @property (strong, nonatomic) NSDictionary *allUnits;
 
@@ -57,6 +59,9 @@
     self.comboString = [[NSMutableString alloc] init];
     
     self.returnPressedCount = 0;
+    self.answerNameLabelsArray = [[NSMutableArray alloc] init];
+    self.actualAnswersArray = [[NSMutableArray alloc] init];
+    [self.actualAnswersArray addObject:@"2345"];
     
     }
 
@@ -114,11 +119,14 @@
     cell.valueTextField.delegate = self;
     
     NSString *labelNameKey = self.visibleUnits[indexPath.row];
+ //   [self.answerLabelsArray addObject:labelNameKey];
     NSString *labelNameValue = [self.allUnits objectForKey:labelNameKey];
+    [self.answerNameLabelsArray addObject:labelNameValue];
 
     
     cell.valueNameLabel.text = labelNameValue;
     cell.valueTextField.placeholder = labelNameKey;
+    //cell.valueTextField.placeholder = self.answerValuesArray[indexPath.row];
     
     if ([labelNameKey isEqualToString:@"Volts"])
     {
@@ -127,14 +135,17 @@
     else if ([labelNameKey isEqualToString:@"Watts"])
     {
         self.wattsTextField = cell.valueTextField;
+
     }
     else if ([labelNameKey isEqualToString:@"Amps"])
     {
         self.ampsTextField = cell.valueTextField;
+
     }
     else if ([labelNameKey isEqualToString:@"Ohms"])
     {
         self.ohmsTextField = cell.valueTextField;
+
     }
     
     
@@ -145,39 +156,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
@@ -213,11 +191,13 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - Calculation Handlers
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     self.returnPressedCount = self.returnPressedCount + 1;
     
-    if (!self.brain)
+    if (!self.brain) // See if there is a Brain object, If not, make one.
     {
         self.brain = [[HighVoltageBrain alloc] init];
         
@@ -227,6 +207,7 @@
         {
             self.voltsString = textField.text;
             [self.comboString appendString:@"Volts"];
+          //  [self.actualAnswersArray addObject:textField.text];
           //  [self.brain getReturnCount:self.returnPressedCount];
         }
         else if (textField == self.wattsTextField)
@@ -252,18 +233,20 @@
     
 //********* This decides first or second digit ********************
         
-        if (self.returnPressedCount <3)
+        if (self.returnPressedCount < 2) // Is it the First number?
         {
             [self.brain addOperandDigit: textField.text];
 //            [self.brain addOperator:self.comboString];
             [self.brain getReturnCount:self.returnPressedCount];
+            [self.actualAnswersArray addObject:@"45678"];
 
-           // self.brain.thisOperator = 12;
+           
         }
-        else
+        else // This will enter 2nd Number from textField
         {
             [self.brain addOperandDigit: textField.text];
             [self.brain getReturnCount:self.returnPressedCount];
+            [self.actualAnswersArray addObject:textField.text];
 
            // [self.brain performCalculationIfPossible];
 
@@ -277,7 +260,9 @@
     {
         [self.brain getReturnCount:self.returnPressedCount];
         [self.brain addOperator:self.comboString];
-       // [self.brain performCalculationIfPossible];
+         NSString *displayValue = [self.brain performCalculationIfPossible];
+        NSLog(@"Answer: %@", displayValue);
+        //[self.brain performCalculationIfPossible];
     }
     
     
@@ -290,11 +275,13 @@
     NSLog(@"returnPressedCount is : %d", self.returnPressedCount);
 //    NSLog(@"addOperandDigit is : %@", @"check the brain");
 
-
+//    NSLog(self.answerNameLabelsArray);
+    NSLog(@"What is this %@", self.actualAnswersArray[0]);
     
 
     
     [textField resignFirstResponder];
+ 
     return YES;
 }
 

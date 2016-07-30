@@ -115,7 +115,7 @@
         //if ([operatorValue containsString:@"Volts"])
              if ([operatorValue containsString:@"Volts"] && [operatorValue containsString:@"Watts"])
         {
-            self.operatorType = self.brainRtrnCount;
+            self.operatorType = OperatorTypeVoltsAmps;
             NSLog(@"You pressed volts & Watts");
            // self.operatorType = ([operatorValue containsString:@"Watts"]) ? OperatorTypeVoltsWatts : OperatorTypeVoltsOhms;
         }
@@ -232,23 +232,90 @@
         double operand1 = [self.operand1String doubleValue];
         double operand2 = [self.operand2String doubleValue];
         
-        double answer = 0;
+        double answer1 = 0;
+        double answer2 = 0;
         
         switch (self.operatorType)
         {
-            case OperatorTypeAddition:
-                answer = operand1 + operand2;
+                
+            case OperatorTypeWattsOhms:
+                self.voltsAsADouble = sqrt(operand1 * operand2);
+                self.ampsAsADouble = sqrt(operand1 / operand2);
+                self.wattsAsADouble = operand1;
+                self.ohmsAsADouble = operand2;
                 break;
-            case OperatorTypeSubtraction:
-                answer = operand1 - operand2;
+            case OperatorTypeWattsAmps:
+                self.ohmsAsADouble = operand1 / (operand2 * operand2);
+                self.voltsAsADouble = operand1 / operand2;
+                self.wattsAsADouble = operand1;
+                self.ampsAsADouble = operand2;
                 break;
-            case OperatorTypeMultiplication:
-                answer = operand1 * operand2;
+            case OperatorTypeWattsVolts:
+                self.ampsAsADouble = operand1 / operand2;
+                self.ohmsAsADouble = (operand2 * operand2) / operand1;
+                self.wattsAsADouble = operand1;
+                self.voltsAsADouble = operand2;
                 break;
+            case OperatorTypeOhmsAmps:
+                self.voltsAsADouble = operand2 * operand1;
+                self.wattsAsADouble = (operand2 * operand2) * operand1;
+                self.ohmsAsADouble = operand1;
+                self.ampsAsADouble = operand2;
+                break;
+            case OperatorTypeOhmsVolts:
+                self.wattsAsADouble = (operand2 * operand2) / operand1;
+                self.ampsAsADouble = operand2 / operand1;
+                self.ohmsAsADouble = operand1;
+                self.voltsAsADouble = operand2;
+                break;
+            case OperatorTypeOhmsWatts:
+                self.ampsAsADouble = sqrt(operand2 / operand1);
+                self.voltsAsADouble = sqrt(operand2 * operand1);
+                self.ohmsAsADouble = operand1;
+                self.wattsAsADouble = operand2;
+                break;
+            case OperatorTypeVoltsAmps:
+                self.wattsAsADouble = operand1 * operand2;
+                self.ohmsAsADouble = operand1 / operand2;
+                self.voltsAsADouble = operand1;
+                self.ampsAsADouble = operand2;
+                break;
+            case OperatorTypeVoltsOhms:
+                self.wattsAsADouble = (operand1 * operand1) / operand2;
+                self.ampsAsADouble = operand1 / operand2;
+                self.voltsAsADouble = operand1;
+                self.ohmsAsADouble = operand2;
+                break;
+            case OperatorTypeVoltsWatts:
+                self.ohmsAsADouble = (operand1 * operand1) / operand2;
+                self.ampsAsADouble = operand2 / operand1;
+                self.voltsAsADouble = operand1;
+                self.wattsAsADouble = operand2;
+                break;
+            case OperatorTypeAmpsOhms:
+                self.voltsAsADouble = operand1 * operand2;
+                self.wattsAsADouble = (operand1 * operand1) * operand2;
+                self.ampsAsADouble = operand1;
+                self.ohmsAsADouble = operand2;
+                break;
+            case OperatorTypeAmpsVolts:
+                self.wattsAsADouble = operand2 * operand1;
+                self.ohmsAsADouble = operand2 / operand1;
+                self.ampsAsADouble = operand1;
+                self.voltsAsADouble = operand2;
+                break;
+            case OperatorTypeAmpsWatts:
+                self.ohmsAsADouble = operand2 / (operand1 * operand1);
+                self.voltsAsADouble = operand2 / operand1;
+                self.ampsAsADouble = operand1;
+                self.wattsAsADouble = operand2;
+                break;
+                
+                
             case OperatorTypeDivision:
                 if (operand2 != 0)
                 {
-                    answer = operand1 / operand2;
+                    answer1 = operand1 / operand2;
                 }
                 else
                 {
@@ -262,7 +329,7 @@
         }
         
         // Calculation successful, return answer
-        return [NSString stringWithFormat:@"%g", answer];
+        return [NSString stringWithFormat:@"%g", self.ampsAsADouble];
     }
     
     // We don't have all the components necessary to perform a transaction so return nil

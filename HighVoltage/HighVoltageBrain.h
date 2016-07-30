@@ -21,17 +21,26 @@ typedef enum
     OperatorTypeWattsOhms,
     OperatorTypeWattsAmps,
     OperatorTypeWattsVolts,
-    OperatorTypeOhmsWatts,
     OperatorTypeOhmsAmps,
     OperatorTypeOhmsVolts,
-    OperatorTypeVoltsOhms,
+    OperatorTypeOhmsWatts,
     OperatorTypeVoltsAmps,
     OperatorTypeVoltsWatts,
+    OperatorTypeVoltsOhms,
     OperatorTypeAmpsOhms,
-    OperatorTypeAmpsWatts,
     OperatorTypeAmpsVolts,
+    OperatorTypeAmpsWatts
 } OperatorType;
 
+@property (strong, nonatomic) NSMutableArray *brainAnswers;
+@property (strong, nonatomic) NSString *voltsAsAString;
+@property (strong, nonatomic) NSString *wattsAsAString;
+@property (strong, nonatomic) NSString *ohmsAsAString;
+@property (strong, nonatomic) NSString *ampsAsAString;
+@property double voltsAsADouble;
+@property double wattsAsADouble;
+@property double ohmsAsADouble;
+@property double ampsAsADouble;
 @property (nonatomic, assign)enum OperatorType *thisOperator;
 
 - (NSString *)addOperandDigit:(NSString *)digit;
