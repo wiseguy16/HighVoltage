@@ -22,6 +22,7 @@
 
 @property (nonatomic, copy) NSMutableString *operand1String;
 @property (nonatomic, copy) NSMutableString *operand2String;
+@property int brainRtrnCount;
 
 @property (assign) OperatorType operatorType;
 
@@ -42,11 +43,17 @@
     return self;
 }
 
+- (int) getReturnCount:(int)rCount
+{
+    self.brainRtrnCount = rCount;
+    return self.brainRtrnCount;
+}
+
 - (NSString *)addOperandDigit:(NSString *)digit
 {
     NSString *returnString;
     
-    if (self.operatorType == OperatorTypeNone)
+    if (self.brainRtrnCount == 0)
     {
         if ([digit isEqualToString:@"."])
         {
@@ -59,9 +66,12 @@
         {
             [self.operand1String appendString:digit];
         }
+      //  NSLog(@"operand1String is %@", self.operand1String);
         returnString = self.operand1String;
+       // NSLog(@"operand1String is %@", self.operand1String);
+
     }
-    else
+    else if (self.brainRtrnCount == 1)
     {
         if ([digit isEqualToString:@"."])
         {
@@ -76,15 +86,19 @@
         }
         returnString = self.operand2String;
     }
-    
+    NSLog(@"operand1String is %@", self.operand1String);
+    NSLog(@"operand2String is %@", self.operand2String);
+
+
     return returnString;
+
 }
 
 - (NSString *)addOperator:(NSString *)operatorValue
 {
     NSString *returnString = nil;
     
-    if ([operatorValue isEqualToString:@"√"])
+    if ([operatorValue isEqualToString:@"^"])
     {
         returnString = [self performSquareRoot];
     }
@@ -98,24 +112,26 @@
     }
     else if (self.operatorType == OperatorTypeNone && ![self.operand1String isEqualToString:@""])
     {
-        if ([operatorValue isEqualToString:@"+"])
+        if ([operatorValue containsString:@"Volts"])
         {
-            self.operatorType = OperatorTypeAddition;
+            self.operatorType = self.brainRtrnCount;
+           // self.operatorType = ([operatorValue containsString:@"Watts"]) ? OperatorTypeVoltsWatts : OperatorTypeVoltsOhms;
         }
-        else if ([operatorValue isEqualToString:@"−"])
+        else if ([operatorValue containsString:@"Watts"])
         {
-            self.operatorType = OperatorTypeSubtraction;
+            self.operatorType = self.brainRtrnCount;
         }
-        else if ([operatorValue isEqualToString:@"×"])
+        else if ([operatorValue containsString:@"Amps"])
         {
-            self.operatorType = OperatorTypeMultiplication;
+            self.operatorType = self.brainRtrnCount;
         }
-        else if ([operatorValue isEqualToString:@"÷"])
+        else if ([operatorValue containsString:@"Ohms"])
         {
-            self.operatorType = OperatorTypeDivision;
+            self.operatorType = self.brainRtrnCount;
         }
+        
     }
-    
+    NSLog(@"OpType is %u", self.operatorType);
     return returnString;
 }
 

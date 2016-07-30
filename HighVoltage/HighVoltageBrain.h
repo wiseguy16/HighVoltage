@@ -13,17 +13,32 @@
 typedef enum
 {
     OperatorTypeNone,
+    OperatorTypeSome,
     OperatorTypeAddition,
     OperatorTypeSubtraction,
     OperatorTypeMultiplication,
-    OperatorTypeDivision
+    OperatorTypeDivision,
+    OperatorTypeWattsOhms,
+    OperatorTypeWattsAmps,
+    OperatorTypeWattsVolts,
+    OperatorTypeOhmsWatts,
+    OperatorTypeOhmsAmps,
+    OperatorTypeOhmsVolts,
+    OperatorTypeVoltsOhms,
+    OperatorTypeVoltsAmps,
+    OperatorTypeVoltsWatts,
+    OperatorTypeAmpsOhms,
+    OperatorTypeAmpsWatts,
+    OperatorTypeAmpsVolts,
 } OperatorType;
 
-@property (assign) OperatorType *thisOperator;
+@property (nonatomic, assign)enum OperatorType *thisOperator;
 
 - (NSString *)addOperandDigit:(NSString *)digit;
 - (NSString *)addOperator:(NSString *)operatorValue;
 - (NSString *)performCalculationIfPossible;
+- (int) getReturnCount:(int)rCount;
+
 
 
 @end

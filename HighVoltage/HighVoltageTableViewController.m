@@ -37,7 +37,7 @@
 @property (strong, nonatomic) NSMutableString *comboString;
 
 
-@property int returnPressedCount;
+//@property int returnPressedCount;
 
 
 
@@ -226,47 +226,60 @@
         {
             self.voltsString = textField.text;
             [self.comboString appendString:@"Volts"];
-            
+          //  [self.brain getReturnCount:self.returnPressedCount];
         }
         else if (textField == self.wattsTextField)
         {
             self.wattsString = textField.text;
             [self.comboString appendString:@"Watts"];
-
+          //  [self.brain getReturnCount:self.returnPressedCount];
         }
         else if (textField == self.ampsTextField)
         {
             self.ampsString = textField.text;
             [self.comboString appendString:@"Amps"];
+          //  [self.brain getReturnCount:self.returnPressedCount];
 
         }
         else if (textField == self.ohmsTextField)
         {
             self.ohmsString = textField.text;
             [self.comboString appendString:@"Ohms"];
+           // [self.brain getReturnCount:self.returnPressedCount];
 
         }
-
+    
 
         
-//        if (self.returnPressedCount <2)
-//        {
-//            [self.brain addOperandDigit: self.operand1ValueAsString];
-//        }
-//        else
-//        {
-//          //  [self.brain addOperandDigit: self.operand1ValueAsString];
-//            [self.brain performCalculationIfPossible];
-//
-//        }
+        if (self.returnPressedCount <3)
+        {
+            [self.brain addOperandDigit: textField.text];
+            [self.brain addOperator:self.comboString];
+            [self.brain getReturnCount:self.returnPressedCount];
+
+           // self.brain.thisOperator = 12;
+        }
+        else
+        {
+            [self.brain addOperandDigit: textField.text];
+            [self.brain getReturnCount:self.returnPressedCount];
+
+           // [self.brain performCalculationIfPossible];
+
+        }
     
     
-    NSLog(@"num is : %@", textField.text);
-    NSLog(@"volts : %@", self.voltsString);
-    NSLog(@"amps is : %@", self.ampsString);
-    NSLog(@"watts is : %@", self.wattsString);
-    NSLog(@"ohms is : %@", self.ohmsString);
+//    NSLog(@"num is : %@", textField.text);
+//    NSLog(@"volts : %@", self.voltsString);
+//    NSLog(@"amps is : %@", self.ampsString);
+//    NSLog(@"watts is : %@", self.wattsString);
+//    NSLog(@"ohms is : %@", self.ohmsString);
     NSLog(@"combo is : %@", self.comboString);
+    NSLog(@"returnPressedCount is : %d", self.returnPressedCount);
+//    NSLog(@"addOperandDigit is : %@", @"check the brain");
+
+
+    
 
     
     [textField resignFirstResponder];
