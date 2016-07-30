@@ -115,6 +115,9 @@
     HighVoltageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HiVoltCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    
+    if (self.returnPressedCount < 2)
+{
     [cell.valueTextField becomeFirstResponder];
     cell.valueTextField.delegate = self;
     
@@ -146,6 +149,13 @@
     {
         self.ohmsTextField = cell.valueTextField;
 
+    }
+}
+    else
+    {
+        cell.valueNameLabel.text = self.brain.ampsAsAString;
+        cell.valueTextField.text = self.brain.ampsAsAString;
+        
     }
     
     
@@ -200,6 +210,8 @@
     if (!self.brain) // See if there is a Brain object, If not, make one.
     {
         self.brain = [[HighVoltageBrain alloc] init];
+        double a = self.brain.ampsAsADouble;
+        NSLog(@"amps is %g", a);
         
      }
     //********* This picks the right textField ********************
@@ -262,7 +274,12 @@
         [self.brain addOperator:self.comboString];
          NSString *displayValue = [self.brain performCalculationIfPossible];
         NSLog(@"Answer: %@", displayValue);
-        //[self.brain performCalculationIfPossible];
+        [self.brain performCalculationIfPossible];
+        NSLog(@"amps is %@", self.brain.ampsAsAString);
+        NSLog(@"volts is %@", self.brain.voltsAsAString);
+        NSLog(@"watts is %@", self.brain.wattsAsAString);
+        NSLog(@"ohms is %@", self.brain.ohmsAsAString);
+        [self.tableView reloadData]; // Doesn't Seem to help?????????
     }
     
     
@@ -278,6 +295,11 @@
 //    NSLog(self.answerNameLabelsArray);
     NSLog(@"What is this %@", self.actualAnswersArray[0]);
     
+   // double a = self.brain.ampsAsADouble;
+//    NSLog(@"amps is %@", self.brain.ampsAsAString);
+//    NSLog(@"volts is %@", self.brain.voltsAsAString);
+//    NSLog(@"watts is %@", self.brain.wattsAsAString);
+//    NSLog(@"ohms is %@", self.brain.ohmsAsAString);
 
     
     [textField resignFirstResponder];

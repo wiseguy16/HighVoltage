@@ -94,48 +94,89 @@
 
 }
 
-- (NSString *)addOperator:(NSString *)operatorValue
+- (NSString *)addOperator:(NSString *)operatorValue  // Picking the right equation based on variables
 {
     NSString *returnString = nil;
     
-    if ([operatorValue isEqualToString:@"^"])
-    {
-        returnString = [self performSquareRoot];
-    }
-    else if ([operatorValue isEqualToString:@"%"])
-    {
-        returnString = [self makePercent];
-    }
-    else if ([operatorValue isEqualToString:@"+/-"])
-    {
-        returnString = [self flipSign];
-    }
-    else if (self.operatorType == OperatorTypeNone && ![self.operand1String isEqualToString:@""])
-    {
-        //if ([operatorValue containsString:@"Volts"])
-             if ([operatorValue containsString:@"Volts"] && [operatorValue containsString:@"Watts"])
+   
+// *********** Work in this AREA NEXT!!!***************************************************************
+    
+    if (self.operatorType == OperatorTypeNone && ![self.operand1String isEqualToString:@""])
         {
-            self.operatorType = OperatorTypeVoltsAmps;
-            NSLog(@"You pressed volts & Watts");
-           // self.operatorType = ([operatorValue containsString:@"Watts"]) ? OperatorTypeVoltsWatts : OperatorTypeVoltsOhms;
-        }
-        else if ([operatorValue containsString:@"Watts"])
-        {
-            self.operatorType = self.brainRtrnCount;
-            NSLog(@"You pressed Watts");
-        }
-        else if ([operatorValue containsString:@"Amps"])
-        {
-            self.operatorType = self.brainRtrnCount;
-            NSLog(@"You pressed Amps");
-        }
-        else if ([operatorValue containsString:@"Ohms"])
-        {
-            self.operatorType = self.brainRtrnCount;
-            NSLog(@"You pressed Ohms");
-        }
         
-    }
+             if ([operatorValue containsString:@"Volts"] && [operatorValue containsString:@"Watts"])
+             {
+                 if ([operatorValue isEqualToString:@"VoltsWatts"])
+                {
+                    self.operatorType = OperatorTypeVoltsWatts;
+                }
+                 else
+                 {
+                     self.operatorType = OperatorTypeWattsVolts;
+                 }
+            
+                 NSLog(@"You pressed volts & Watts");
+             }
+             else if ([operatorValue containsString:@"Volts"] && [operatorValue containsString:@"Ohms"])
+             {
+                 if ([operatorValue isEqualToString:@"VoltsOhms"])
+                 {
+                     self.operatorType = OperatorTypeVoltsOhms;
+                 }
+                 else
+                 {
+                     self.operatorType = OperatorTypeOhmsVolts;
+                 }
+             }
+             else if ([operatorValue containsString:@"Volts"] && [operatorValue containsString:@"Amps"])
+             {
+                 if ([operatorValue isEqualToString:@"VoltsAmps"])
+                 {
+                     self.operatorType = OperatorTypeVoltsAmps;
+                 }
+                 else
+                 {
+                     self.operatorType = OperatorTypeAmpsVolts;
+                 }
+             }
+             else if ([operatorValue containsString:@"Ohms"] && [operatorValue containsString:@"Amps"])
+             {
+                 if ([operatorValue isEqualToString:@"OhmsAmps"])
+                 {
+                     self.operatorType = OperatorTypeOhmsAmps;
+                 }
+                 else
+                 {
+                     self.operatorType = OperatorTypeAmpsOhms;
+                 }
+             }
+             else if ([operatorValue containsString:@"Ohms"] && [operatorValue containsString:@"Watts"])
+             {
+                 if ([operatorValue isEqualToString:@"OhmsWatts"])
+                 {
+                     self.operatorType = OperatorTypeOhmsWatts;
+                 }
+                 else
+                 {
+                     self.operatorType = OperatorTypeWattsOhms;
+                 }
+             }
+             else if ([operatorValue containsString:@"Amps"] && [operatorValue containsString:@"Watts"])
+             {
+                 if ([operatorValue isEqualToString:@"AmpsWatts"])
+                 {
+                     self.operatorType = OperatorTypeAmpsWatts;
+                 }
+                 else
+                 {
+                     self.operatorType = OperatorTypeWattsAmps;
+                 }
+             }
+
+
+
+            
+        }
     NSLog(@"OpType is %u", self.operatorType);
     return returnString;
 }
@@ -316,6 +357,7 @@
                 if (operand2 != 0)
                 {
                     answer1 = operand1 / operand2;
+                    answer2 = answer1;
                 }
                 else
                 {
@@ -327,7 +369,10 @@
             default:
                 break;
         }
-        
+        self.ampsAsAString = [NSString stringWithFormat:@"%g", self.ampsAsADouble];
+        self.voltsAsAString = [NSString stringWithFormat:@"%g", self.voltsAsADouble];
+        self.wattsAsAString = [NSString stringWithFormat:@"%g", self.wattsAsADouble];
+        self.ohmsAsAString = [NSString stringWithFormat:@"%g", self.ohmsAsADouble];
         // Calculation successful, return answer
         return [NSString stringWithFormat:@"%g", self.ampsAsADouble];
     }
