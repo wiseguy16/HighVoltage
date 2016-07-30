@@ -112,22 +112,27 @@
     }
     else if (self.operatorType == OperatorTypeNone && ![self.operand1String isEqualToString:@""])
     {
-        if ([operatorValue containsString:@"Volts"])
+        //if ([operatorValue containsString:@"Volts"])
+             if ([operatorValue containsString:@"Volts"] && [operatorValue containsString:@"Watts"])
         {
             self.operatorType = self.brainRtrnCount;
+            NSLog(@"You pressed volts & Watts");
            // self.operatorType = ([operatorValue containsString:@"Watts"]) ? OperatorTypeVoltsWatts : OperatorTypeVoltsOhms;
         }
         else if ([operatorValue containsString:@"Watts"])
         {
             self.operatorType = self.brainRtrnCount;
+            NSLog(@"You pressed Watts");
         }
         else if ([operatorValue containsString:@"Amps"])
         {
             self.operatorType = self.brainRtrnCount;
+            NSLog(@"You pressed Amps");
         }
         else if ([operatorValue containsString:@"Ohms"])
         {
             self.operatorType = self.brainRtrnCount;
+            NSLog(@"You pressed Ohms");
         }
         
     }

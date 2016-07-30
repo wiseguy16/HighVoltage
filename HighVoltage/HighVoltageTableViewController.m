@@ -221,7 +221,8 @@
     {
         self.brain = [[HighVoltageBrain alloc] init];
         
-     }   
+     }
+    //********* This picks the right textField ********************
         if (textField == self.voltsTextField)
         {
             self.voltsString = textField.text;
@@ -249,12 +250,12 @@
 
         }
     
-
+//********* This decides first or second digit ********************
         
         if (self.returnPressedCount <3)
         {
             [self.brain addOperandDigit: textField.text];
-            [self.brain addOperator:self.comboString];
+//            [self.brain addOperator:self.comboString];
             [self.brain getReturnCount:self.returnPressedCount];
 
            // self.brain.thisOperator = 12;
@@ -267,6 +268,17 @@
            // [self.brain performCalculationIfPossible];
 
         }
+    
+//********* This happens after 2nd number entered ********************
+    //      Equation is picked from comboString
+    //      Calculation is performed
+    
+    if (self.returnPressedCount == 2)
+    {
+        [self.brain getReturnCount:self.returnPressedCount];
+        [self.brain addOperator:self.comboString];
+       // [self.brain performCalculationIfPossible];
+    }
     
     
 //    NSLog(@"num is : %@", textField.text);
