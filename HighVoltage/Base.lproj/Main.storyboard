@@ -15,20 +15,20 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HiVoltCell" id="bMT-CO-vcD" customClass="HighVoltageTableViewCell">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bMT-CO-vcD" id="puE-OR-uId">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Electrical Potential" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3H-zT-eZg">
-                                            <rect key="frame" x="8" y="9" width="173" height="26"/>
+                                            <rect key="frame" x="8" y="9" width="172.5" height="25.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Volts (V)" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pi4-fc-WDo">
-                                            <rect key="frame" x="516" y="7" width="76" height="30"/>
+                                            <rect key="frame" x="200.5" y="7" width="391.5" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                         </textField>
@@ -36,6 +36,7 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="pi4-fc-WDo" secondAttribute="trailing" constant="8" id="WmE-f3-WfZ"/>
                                         <constraint firstItem="pi4-fc-WDo" firstAttribute="centerY" secondItem="puE-OR-uId" secondAttribute="centerY" id="cTk-V5-yab"/>
+                                        <constraint firstItem="pi4-fc-WDo" firstAttribute="leading" secondItem="B3H-zT-eZg" secondAttribute="trailing" constant="20" id="f1h-lC-Fig"/>
                                         <constraint firstItem="B3H-zT-eZg" firstAttribute="leading" secondItem="puE-OR-uId" secondAttribute="leading" constant="8" id="f3X-vX-Nnl"/>
                                         <constraint firstItem="B3H-zT-eZg" firstAttribute="centerY" secondItem="puE-OR-uId" secondAttribute="centerY" id="sXV-kx-eg3"/>
                                     </constraints>

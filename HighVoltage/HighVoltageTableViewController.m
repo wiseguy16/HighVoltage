@@ -22,8 +22,8 @@
 @property (strong, nonatomic) NSMutableArray *visibleUnits;
 @property (strong, nonatomic) NSMutableArray *remainingUnits;
 @property (strong, nonatomic) NSMutableArray *textFieldArray;
-@property (strong, nonatomic) NSMutableArray *answerNameLabelsArray;
-@property (strong, nonatomic) NSMutableArray *actualAnswersArray;
+@property (strong, nonatomic) NSArray *answerNameLabelsArray;
+@property (strong, nonatomic) NSArray *actualAnswersArray;
 
 @property (strong, nonatomic) NSDictionary *allUnits;
 
@@ -47,7 +47,8 @@
 
 @implementation HighVoltageTableViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.visibleUnits = [[NSMutableArray alloc] init];
@@ -59,13 +60,11 @@
     self.comboString = [[NSMutableString alloc] init];
     
     self.returnPressedCount = 0;
-    self.answerNameLabelsArray = [[NSMutableArray alloc] init];
-    self.actualAnswersArray = [[NSMutableArray alloc] init];
-    [self.actualAnswersArray addObject:@"2345"];
-    
-    }
+    self.answerNameLabelsArray = @[@"Electrical Potential (volts)", @"Power (watts)", @"Current (amps)", @"Resistance (ohms)"];
+}
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -79,7 +78,7 @@
         UnitsListTableViewController *hVListVC = [segue destinationViewController];
         hVListVC.units = self.remainingUnits;
         hVListVC.popoverPresentationController.delegate = self;
-        hVListVC.delegate = self; // This assigns a value to the delegate
+        hVListVC.delegate = self; // ******************This assigns a value to the delegate
         int contentHeight = 44.0f * self.remainingUnits.count;
         hVListVC.preferredContentSize = CGSizeMake(200.0f, contentHeight);
     }
@@ -106,7 +105,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.visibleUnits.count;
+    if (self.returnPressedCount < 2)
+    {
+     return self.visibleUnits.count;
+    }
+    else
+    {
+        return self.allUnits.count;
+    }
+    
 }
 
 
@@ -122,14 +129,11 @@
     cell.valueTextField.delegate = self;
     
     NSString *labelNameKey = self.visibleUnits[indexPath.row];
- //   [self.answerLabelsArray addObject:labelNameKey];
     NSString *labelNameValue = [self.allUnits objectForKey:labelNameKey];
-    [self.answerNameLabelsArray addObject:labelNameValue];
 
     
     cell.valueNameLabel.text = labelNameValue;
     cell.valueTextField.placeholder = labelNameKey;
-    //cell.valueTextField.placeholder = self.answerValuesArray[indexPath.row];
     
     if ([labelNameKey isEqualToString:@"Volts"])
     {
@@ -153,14 +157,10 @@
 }
     else
     {
-        cell.valueNameLabel.text = self.brain.ampsAsAString;
-        cell.valueTextField.text = self.brain.ampsAsAString;
+        cell.valueNameLabel.text = self.answerNameLabelsArray[indexPath.row];
+        cell.valueTextField.text = self.actualAnswersArray[indexPath.row];
         
     }
-    
-    
-//    self.operand1ValueAsString = cell.valueTextField.text;
-    
     
     
     return cell;
@@ -250,7 +250,7 @@
             [self.brain addOperandDigit: textField.text];
 //            [self.brain addOperator:self.comboString];
             [self.brain getReturnCount:self.returnPressedCount];
-            [self.actualAnswersArray addObject:@"45678"];
+           // [self.actualAnswersArray addObject:@"45678"];
 
            
         }
@@ -258,7 +258,7 @@
         {
             [self.brain addOperandDigit: textField.text];
             [self.brain getReturnCount:self.returnPressedCount];
-            [self.actualAnswersArray addObject:textField.text];
+         //   [self.actualAnswersArray addObject:textField.text];
 
            // [self.brain performCalculationIfPossible];
 
@@ -279,6 +279,8 @@
         NSLog(@"volts is %@", self.brain.voltsAsAString);
         NSLog(@"watts is %@", self.brain.wattsAsAString);
         NSLog(@"ohms is %@", self.brain.ohmsAsAString);
+        self.actualAnswersArray = @[self.brain.voltsAsAString, self.brain.wattsAsAString, self.brain.ampsAsAString, self.brain.ohmsAsAString];
+
         [self.tableView reloadData]; // Doesn't Seem to help?????????
     }
     
