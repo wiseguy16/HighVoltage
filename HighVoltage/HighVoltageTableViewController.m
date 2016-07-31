@@ -15,8 +15,9 @@
 
 @interface HighVoltageTableViewController () <UIPopoverPresentationControllerDelegate, UnitsListDelegate, UITextFieldDelegate>
 
-@property (strong, nonatomic) HighVoltageBrain *brain;
 // This is the private interface******************************
+
+@property (strong, nonatomic) HighVoltageBrain *brain;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @property (strong, nonatomic) NSMutableArray *visibleUnits;
@@ -31,6 +32,7 @@
 @property (strong, nonatomic) UITextField *wattsTextField;
 @property (strong, nonatomic) UITextField *ampsTextField;
 @property (strong, nonatomic) UITextField *ohmsTextField;
+
 @property (strong, nonatomic) NSString *voltsString;
 @property (strong, nonatomic) NSString *wattsString;
 @property (strong, nonatomic) NSString *ampsString;
@@ -38,10 +40,7 @@
 
 @property (strong, nonatomic) NSMutableString *comboString;
 
-
-//@property int returnPressedCount;
-
-
+// 1.21 Gigawatts is 1210000000 watts
 
 @end
 
@@ -124,7 +123,7 @@
     // Configure the cell...
     
     if (self.returnPressedCount < 2)
-{
+  {
     [cell.valueTextField becomeFirstResponder];
     cell.valueTextField.delegate = self;
     
@@ -142,26 +141,21 @@
     else if ([labelNameKey isEqualToString:@"Watts"])
     {
         self.wattsTextField = cell.valueTextField;
-
     }
     else if ([labelNameKey isEqualToString:@"Amps"])
     {
         self.ampsTextField = cell.valueTextField;
-
     }
     else if ([labelNameKey isEqualToString:@"Ohms"])
     {
         self.ohmsTextField = cell.valueTextField;
-
     }
-}
+  }
     else
-    {
+  {
         cell.valueNameLabel.text = self.answerNameLabelsArray[indexPath.row];
         cell.valueTextField.text = self.actualAnswersArray[indexPath.row];
-        
-    }
-    
+  }
     
     return cell;
 }
@@ -184,8 +178,10 @@
     self.allUnits = @{@"Volts": @"Electrical Potential", @"Watts": @"Power", @"Amps": @"Current", @"Ohms": @"Resistance"};
     self.returnPressedCount = 0;
     self.remainingUnits = [[self.allUnits allKeys] mutableCopy];
-        
-    
+    self.voltsTextField.text = @"";
+    self.ampsTextField.text = @"";
+    self.ohmsTextField.text = @"";
+    self.wattsTextField.text = @"";
     self.brain = nil;
     [self.tableView reloadData];
 }
@@ -220,27 +216,22 @@
         {
             self.voltsString = textField.text;
             [self.comboString appendString:@"Volts"];
-          //  [self.actualAnswersArray addObject:textField.text];
-          //  [self.brain getReturnCount:self.returnPressedCount];
         }
         else if (textField == self.wattsTextField)
         {
             self.wattsString = textField.text;
             [self.comboString appendString:@"Watts"];
-          //  [self.brain getReturnCount:self.returnPressedCount];
         }
         else if (textField == self.ampsTextField)
         {
             self.ampsString = textField.text;
             [self.comboString appendString:@"Amps"];
-          //  [self.brain getReturnCount:self.returnPressedCount];
 
         }
         else if (textField == self.ohmsTextField)
         {
             self.ohmsString = textField.text;
             [self.comboString appendString:@"Ohms"];
-           // [self.brain getReturnCount:self.returnPressedCount];
 
         }
     

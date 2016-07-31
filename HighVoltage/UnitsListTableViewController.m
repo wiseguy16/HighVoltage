@@ -59,7 +59,6 @@
 #pragma mark - UITableView delegate
 
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES]; // Turns off the highlight!!!
@@ -72,8 +71,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
-
-
 
 
 

@@ -21,7 +21,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    //[self.valueTextField.delegate = self];
     // Initialization code
 }
 
@@ -32,11 +31,6 @@
     // Configure the view for the selected state
 }
 
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-//    [self.valueTextField resignFirstResponder];
-//    return YES;
-//}
 
-// <UITextFieldDelegate>
 
 @end

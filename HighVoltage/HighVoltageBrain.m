@@ -106,7 +106,6 @@
                      self.operatorType = OperatorTypeWattsVolts;
                  }
             
-                 NSLog(@"You pressed volts & Watts");
              }
              else if ([operatorValue containsString:@"Volts"] && [operatorValue containsString:@"Ohms"])
              {
@@ -365,7 +364,7 @@
         self.wattsAsAString = [NSString stringWithFormat:@"%g", self.wattsAsADouble];
         self.ohmsAsAString = [NSString stringWithFormat:@"%g", self.ohmsAsADouble];
         // Calculation successful, return answer
-        return [NSString stringWithFormat:@"%g", self.ampsAsADouble];
+        return [NSString stringWithFormat:@"%g", answer1];
     }
     
     // We don't have all the components necessary to perform a transaction so return nil
