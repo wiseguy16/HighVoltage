@@ -161,27 +161,21 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)clearTapped:(UIBarButtonItem *)sender
 {
     // self.HighVoltageBrain = nil;
     self.visibleUnits = [[NSMutableArray alloc] init];
     self.allUnits = @{@"Volts": @"Electrical Potential", @"Watts": @"Power", @"Amps": @"Current", @"Ohms": @"Resistance"};
-    self.returnPressedCount = 0;
+    
     self.remainingUnits = [[self.allUnits allKeys] mutableCopy];
     self.voltsTextField.text = @"";
     self.ampsTextField.text = @"";
     self.ohmsTextField.text = @"";
     self.wattsTextField.text = @"";
+    self.returnPressedCount = 0;
+    self.comboString = [NSMutableString stringWithFormat:@""];
+
     self.brain = nil;
     [self.tableView reloadData];
 }
@@ -211,7 +205,7 @@
         self.brain = [[HighVoltageBrain alloc] init];
         
      }
-    //********* This picks the right textField ********************
+//********* This picks the right textField ********************
         if (textField == self.voltsTextField)
         {
             self.voltsString = textField.text;

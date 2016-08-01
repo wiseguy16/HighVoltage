@@ -92,7 +92,7 @@
    
 // *********** Work in this AREA NEXT!!!***************************************************************
     
-    if (self.operatorType == OperatorTypeNone && ![self.operand1String isEqualToString:@""])
+    if (self.operatorType == OperatorTypeNone ) //&& ![self.operand1String isEqualToString:@""])
         {
         
              if ([operatorValue containsString:@"Volts"] && [operatorValue containsString:@"Watts"])
